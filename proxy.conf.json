@@ -1,0 +1,10 @@
+
+{
+    "/githubAuth/*": 
+    {
+        "target": "https://github.com",
+        "changeOrigin": true,
+        "secure": false,
+        "pathRewrite": {"^/githubAuth" : ""}
+    }
+  }

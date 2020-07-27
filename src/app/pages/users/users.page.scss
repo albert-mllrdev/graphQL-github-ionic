@@ -1,0 +1,22 @@
+ion-header{
+    padding-top: 4px;
+    background: var(--ion-color-dark);
+
+    ion-title{
+        max-width: 100px;
+    }
+    .progress-bar-container{
+        height:4px;
+    }
+}
+
+
+ion-content{
+    ion-toolbar{
+        position: fixed;
+
+        app-user-list-sorting{
+            width: 100%;
+        }
+    }
+}

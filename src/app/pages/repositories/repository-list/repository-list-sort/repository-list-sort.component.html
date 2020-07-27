@@ -1,0 +1,16 @@
+<form [formGroup]="sortForm">
+  <ion-card mode="md">
+    <ion-card-content>
+      <ion-select formControlName="sort" interface="popover" class="ion-no-margin ion-no-padding" (ionChange)="setSort()" mode="ios">       
+        <ion-select-option value="{{sortItem.key}}" *ngFor="let sortItem of sortItems">{{sortItem.value}}</ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
+  <ion-card mode="md">
+    <ion-card-content>
+      <ion-select formControlName="direction" interface="popover" class="ion-no-margin ion-no-padding" (ionChange)="setSort()" mode="ios">
+        <ion-select-option value="{{sortDirection.key}}" *ngFor="let sortDirection of sortDirections">{{sortDirection.value}}</ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
+</form>

@@ -1,0 +1,23 @@
+<ion-item>
+  <ion-avatar slot="start">
+    <ion-img [src]="user.avatarUrl"></ion-img>
+  </ion-avatar>
+  <ion-label>
+    <ion-text *ngIf="user.name" color="primary"><b>{{user.name}}</b> 
+      <br>
+    </ion-text>
+    <ion-text>{{user.login}}</ion-text>
+    <br>
+    <ion-note *ngIf="(user.createdAt)">joined {{convertToDate(user.createdAt) | timeAgo}}</ion-note>
+    <ion-note *ngIf="(user.totalFollowers) || (user.totalFollowers === 0)">around {{user.totalFollowers | shortNumber}} followers</ion-note>
+    <ion-note *ngIf=" (user.totalRepositories) || (user.totalRepositories === 0)">{{user.totalRepositories | number :"1.0"}} public repositories</ion-note>
+    <br>
+    <ion-chip *ngIf="!user.viewerIsFollowing" (click)="follow($event, user)">
+      <ion-label>Follow</ion-label>
+    </ion-chip>
+    <ion-chip *ngIf="user.viewerIsFollowing" (click)="unfollow($event, user)">
+      <ion-label>Unfollow</ion-label>
+    </ion-chip>
+  </ion-label>
+  <ion-icon name="arrow-forward" end></ion-icon>
+</ion-item>

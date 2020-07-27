@@ -1,0 +1,12 @@
+<app-user-list-skeleton *ngIf="!users"></app-user-list-skeleton>
+<ion-list *ngIf="users">
+  <ng-container *ngFor="let user of users | unique: 'id'">
+    <app-user-list-item [user]="user" (click)="viewUserRepositories(user.login)"></app-user-list-item>
+  </ng-container>
+  <ion-item *ngIf="users?.length == 0">
+    <ion-text color="danger">
+      No users found...
+    </ion-text>
+  </ion-item>
+</ion-list>
+

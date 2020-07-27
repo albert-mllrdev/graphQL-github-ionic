@@ -1,0 +1,7 @@
+<ion-badge color="medium" *ngIf="count !== 0">
+  <ion-text *ngIf="count">{{count | number : "1.0"}}</ion-text>
+  <ion-text *ngIf="!count" color="medium">{{"--"}}</ion-text>
+</ion-badge>
+<ion-badge color="danger" *ngIf="count === 0">
+  <ion-text>None</ion-text>
+</ion-badge>

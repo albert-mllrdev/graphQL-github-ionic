@@ -1,0 +1,26 @@
+::ng-deep ion-popover{
+
+    ion-radio{
+        opacity: 0;
+        margin-right: -30px;
+    }    
+
+    ion-item.item-radio-checked{
+        font-weight: bold;
+    }
+}
+
+ion-card{
+    width: 52%;
+    float: left;
+    
+    &:first-child{
+        margin-right: 0;
+    }
+
+    &:last-child{
+        width: 40%;
+        float: right;
+        margin-left: 0;
+    }
+}

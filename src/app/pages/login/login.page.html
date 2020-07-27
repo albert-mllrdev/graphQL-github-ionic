@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="dark" mode="ios">
+    <ion-title *ngIf="hasAPIKeys">Login</ion-title>
+    <ion-title *ngIf="!hasAPIKeys">Update Token</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ng-container *ngIf="hasAPIKeys">
+      <ion-text>  Please login with your <strong>GitHub account</strong>.</ion-text><br><br>
+      <ion-button (click)="logIn()">Login</ion-button>
+      <br><br><br> 
+    </ng-container>
+    <ion-text>update GITHUB_AUTH_TOKEN in environment.ts</ion-text>
+  </ion-list>
+</ion-content>
+

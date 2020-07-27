@@ -1,0 +1,29 @@
+<ion-header  mode="md">
+  <ion-toolbar color="dark">
+    <ion-title class="ion-no-padding">
+      <ion-label>
+        <ion-text>Repositories </ion-text>
+        <app-repository-header-count [count]="totalRepositories"></app-repository-header-count>       
+      </ion-label>
+      <br>
+      <ion-note color="primary">{{parameters.login}}</ion-note>
+    </ion-title> 
+      <ion-avatar slot="end">
+        <ion-img [src]="user.avatarUrl" *ngIf="user"></ion-img>
+      </ion-avatar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back" defaultHref="users"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="progress-bar-container">
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+  </div>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar color="medium">
+    <app-repository-list-sort></app-repository-list-sort>
+  </ion-toolbar>
+  <app-repository-list [repositories]="repositories"></app-repository-list>
+  <app-list-infinite-scroll (loadMore)="loadMoreRepositories($event)" [loadMoreText]="'repositories'" *ngIf="hasNextPage"></app-list-infinite-scroll>
+</ion-content>

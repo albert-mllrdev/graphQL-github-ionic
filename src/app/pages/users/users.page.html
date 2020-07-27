@@ -1,0 +1,18 @@
+<ion-header mode="md">
+  <ion-toolbar color="dark">
+    <ion-title slot="start">Users</ion-title>    
+    <app-user-list-search></app-user-list-search>
+  </ion-toolbar>
+  <div class="progress-bar-container">
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+  </div>
+</ion-header>
+<ion-content>
+  <ion-toolbar color="medium">  
+    <ion-item color="medium" lines="none">
+      <app-user-list-sort></app-user-list-sort>
+    </ion-item>
+  </ion-toolbar>
+  <app-user-list [users]="users"></app-user-list>
+  <app-list-infinite-scroll (loadMore)="loadMoreUsers($event)" [loadMoreText]="'users'" *ngIf="hasNextPage"></app-list-infinite-scroll>
+</ion-content>

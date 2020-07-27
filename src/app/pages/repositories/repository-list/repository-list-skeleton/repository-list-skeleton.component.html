@@ -1,0 +1,19 @@
+<ion-list class="ion-no-padding">
+  <ng-container *ngFor="let skeleton of skeletons">
+    <ion-item lines="none" class="repository-info">
+      <div>
+        <ion-label color="primary">
+          <ion-skeleton-text animated class="name"></ion-skeleton-text>
+        </ion-label>
+        <ion-note>
+          <ion-skeleton-text animated class="dates"></ion-skeleton-text> <ion-skeleton-text animated class="dates"></ion-skeleton-text>
+        </ion-note>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-skeleton-text animated class="language"></ion-skeleton-text> 
+      <ion-skeleton-text animated class="language"></ion-skeleton-text> 
+      <ion-skeleton-text animated class="language"></ion-skeleton-text>
+    </ion-item>
+  </ng-container>
+</ion-list>

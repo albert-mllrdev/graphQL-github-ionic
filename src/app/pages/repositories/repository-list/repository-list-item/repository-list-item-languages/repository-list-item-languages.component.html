@@ -1,0 +1,4 @@
+<ng-container *ngFor="let language of languages">
+  <ion-badge *ngIf="language.usage" [style.background-color]="language.color"> {{language.name}} {{language.usage}}</ion-badge>
+</ng-container>
+<ion-badge *ngIf="languages?.length == 0" color="danger">No language</ion-badge>

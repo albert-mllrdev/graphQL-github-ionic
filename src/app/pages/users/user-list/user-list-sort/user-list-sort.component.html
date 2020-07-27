@@ -1,0 +1,3 @@
+<ion-select interface="action-sheet" [formControl]="sortControl" (ionChange)="setSort()" mode="md">       
+  <ion-select-option value="{{sortItem.key}}" *ngFor="let sortItem of sortItems">{{sortItem.value}}</ion-select-option>
+</ion-select>

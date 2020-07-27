@@ -1,0 +1,35 @@
+ion-list {
+    top: 50px;
+    position: relative;
+
+    ion-item {
+        padding-bottom: 2px;
+
+        ion-avatar{
+            width:60px;
+            height: 60px;
+        }
+
+        ion-label{
+            margin-bottom: 48px;
+            margin-top: 7px;
+    
+            ion-skeleton-text{
+                height: 1em;
+        
+                &.name{
+                    width: 60%;
+                }
+        
+                &.login{
+                    width: 30%;
+                }
+        
+                &.created{
+                    width: 30%;
+                    height: .8em;
+                }
+            }
+        }    
+    }
+}

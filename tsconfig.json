@@ -1,0 +1,39 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "lib": [
+      "es2018",
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "paths": {
+      "@albert/core/*": ["./src/app/core/*"],
+      "@albert/enums/*": ["./src/app/core/enums/*"],
+      "@albert/interfaces/*": ["./src/app/core/interfaces/*"],
+      "@albert/data/*": ["./src/app/core/data/*"],
+      "@albert/queries/*": ["./src/app/core/graphQL/queries/*"], 
+      "@albert/mutations/*": ["./src/app/core/graphQL/mutations/*"],      
+      "@albert/environments/*": ["./src/environments/*"],
+      "@albert/shared/*": ["./src/app/shared/*"],
+      "@albert/graphQL/*": ["./src/app/core/graphQL/*"],
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

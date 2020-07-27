@@ -1,0 +1,24 @@
+ion-header{
+    padding-top: 4px;
+    background: var(--ion-color-dark);
+
+    ion-avatar {
+        max-width: 40px;
+        max-height: 40px;
+        margin-right: 10px;
+    }
+
+    .progress-bar-container{
+        height:4px;
+    }
+
+    ion-skeleton-text {
+        --background-rgb: 255, 255, 255;
+    }
+}
+
+ion-content{
+    ion-toolbar{
+        position: fixed;
+    }
+}
