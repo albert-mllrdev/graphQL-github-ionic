@@ -7,7 +7,7 @@ import { RepositoryOrderField, OrderDirection } from '@albert/core/graphQL/gener
 export const environment = {
   production: false,
   GRAPHQL_URI: 'https://api.github.com/graphql',
-  GITHUB_AUTH_TOKEN: '151fc5fa1bf985cedfb53304460afd3b94679328',
+  GITHUB_AUTH_TOKEN: '',
   GITHUB_AUTH_URI: 'https://github.com/login/oauth/authorize',
   GITHUB_CLIENT_ID: '',
   GITHUB_SECRET: '',
