@@ -8,5 +8,5 @@
   <ion-badge color="warning" slot="end" *ngIf="repository.isPrivate">Private <ion-icon name="lock-closed" item-end></ion-icon></ion-badge>
 </ion-item>
 <ion-item>
-  <app-repository-list-item-languages [languages]=repository.languages></app-repository-list-item-languages>
+  <app-repository-list-item-languages [languages]=repository.repositoryLanguages></app-repository-list-item-languages>
 </ion-item>

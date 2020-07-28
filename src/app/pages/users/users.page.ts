@@ -42,7 +42,7 @@ export class UsersPage implements OnInit {
   initializeUsers() {
     this.isLoading = true;
     this.userService.initialize(this.parameters);
-    this.userService.loadUsers().subscribe((result: any) => {
+    this.userService.loadUsers().subscribe((result: IUserFetchResult | null) => {
       this.loadUsers(result);
       this.isLoading = false;
     },
@@ -53,7 +53,7 @@ export class UsersPage implements OnInit {
     });
   }
 
-  loadUsers(result?: IUserFetchResult | null){
+  loadUsers(result: IUserFetchResult | null){
     if (result) {
       this.users =  [... result.users];
       this.hasNextPage = result.hasNextPage;
@@ -63,7 +63,7 @@ export class UsersPage implements OnInit {
 
   loadMoreUsers(event: { target: any; }) {
     this.isLoading = true;
-    this.userService.loadMoreUsers(this.parameters.cursor).subscribe((result: any) => {
+    this.userService.loadMoreUsers(this.parameters.cursor).subscribe(() => {
       event.target.complete();
     });
   }
@@ -72,7 +72,8 @@ export class UsersPage implements OnInit {
     this.users = null;
     this.parameters.cursor =  null;
     this.content.scrollToTop();
-    this.userService.updateVariables(this.parameters).subscribe((result?: IUserFetchResult | null) => {
+    this.isLoading = true;
+    this.userService.updateVariables(this.parameters).subscribe((result: IUserFetchResult | null) => {
       this.loadUsers(result);
     });
   }
