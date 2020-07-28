@@ -1,11 +1,7 @@
-export enum RepositorySortItem {
-    NAME = 'NAME',
-    CREATED_AT = 'CREATED_AT',
-    UPDATED_AT = 'UPDATED_AT'
-}
+import { RepositoryOrderField } from '../graphQL/generated/graphql';
 
 export const RepositorySortItemLabel = new Map<string, string>([
-    [RepositorySortItem.NAME, 'Sort by Name'],
-    [RepositorySortItem.CREATED_AT, 'Sort by Date Created'],
-    [RepositorySortItem.UPDATED_AT, 'Sort by Date Updated']
+    [RepositoryOrderField.Name, 'Sort by Name'],
+    [RepositoryOrderField.CreatedAt, 'Sort by Date Created'],
+    [RepositoryOrderField.UpdatedAt, 'Sort by Date Updated']
 ]);

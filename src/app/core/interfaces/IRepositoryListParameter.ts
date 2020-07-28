@@ -1,10 +1,9 @@
-import { RepositorySortItem } from '../enums/repository-sort-item';
-import { SortDirection } from '../enums/sort-direction';
+import { OrderDirection, RepositoryOrderField } from '../graphQL/generated/graphql';
 
 export interface IRepositoryListParameter {
     login: string;
     cursor?: string | null;
     fetch: number;
-    sortBy: RepositorySortItem;
-    orderBy: SortDirection;
+    sortBy: RepositoryOrderField;
+    orderBy: OrderDirection;
 }

@@ -5,8 +5,7 @@ import { map } from 'rxjs/operators';
 import { UserSortItem } from '@albert/enums/user-sort-item';
 import { userSort, repositorySort, userSearch } from '@albert/queries/local.query';
 import { updateUserSort, updateRepositorySort, updateUserSearch } from '@albert/core/graphQL/queries/local.mutation';
-import { RepositorySortItem } from '@albert/enums/repository-sort-item';
-import { SortDirection } from '@albert/enums/sort-direction';
+import { RepositoryOrderField, OrderDirection } from '@albert/generatedGQL/graphql';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +54,7 @@ export class LocalService {
     );
   }
 
-  setRepositorySort(sort: RepositorySortItem, direction: SortDirection){
+  setRepositorySort(sort: RepositoryOrderField, direction: OrderDirection){
     this.apollo.mutate({
       mutation: updateRepositorySort,
       variables: {
@@ -71,7 +70,8 @@ export class LocalService {
     })
     .valueChanges.pipe(
         map(result => {
-            return (!result.data) ? { sort: RepositorySortItem.NAME, direction: SortDirection.ASC } : (result.data as any).repositorySort;
+            return (!result.data) ? { sort: RepositoryOrderField.Name, direction: OrderDirection.Asc } :
+            (result.data as any).repositorySort;
         })
     );
   }

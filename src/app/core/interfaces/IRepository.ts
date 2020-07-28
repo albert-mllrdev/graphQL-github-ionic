@@ -6,5 +6,6 @@ export interface IRepository {
     isPrivate: boolean;
     createdAt: Date;
     updatedAt: Date;
-    languages: ILanguage[];
+    // languages?: ILanguage[];
+    repositoryLanguages?: ILanguage[];
 }

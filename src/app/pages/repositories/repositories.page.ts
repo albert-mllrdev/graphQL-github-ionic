@@ -6,12 +6,11 @@ import { IRepository } from '@albert/interfaces/IRepository';
 import { IUser } from '@albert/interfaces/IUser';
 import { RepositoryService } from '@albert/services/repository.service';
 import { environment } from '@albert/environments/environment';
-import { RepositorySortItem } from '@albert/enums/repository-sort-item';
-import { SortDirection } from '@albert/enums/sort-direction';
 import { LocalService } from '@albert/services/local.service';
 import { UserService } from '@albert/services/user.service';
 import { IRepositoryFetchResult } from '@albert/core/interfaces/IRepositoryFetchResult';
 import { IRepositoryListParameter } from '@albert/core/interfaces/IRepositoryListParameter';
+import { OrderDirection, RepositoryOrderField } from '@albert/core/graphQL/generated/graphql';
 
 @Component({
   selector: 'app-repositories',
@@ -31,8 +30,8 @@ export class RepositoriesPage implements OnInit {
     login : '',
     cursor: null,
     fetch: environment.RECORD_FETCH_COUNT,
-    sortBy: RepositorySortItem.NAME,
-    orderBy: SortDirection.ASC
+    sortBy: RepositoryOrderField.Name,
+    orderBy: OrderDirection.Asc
   };
 
   constructor(
@@ -61,7 +60,7 @@ export class RepositoriesPage implements OnInit {
   initializeRepositories() {
     this.isLoading = true;
     this.repositoryService.initialize(this.parameters);
-    this.repositoryService.getRepositories().subscribe((result: any) => {
+    this.repositoryService.getRepositories().subscribe((result: IRepositoryFetchResult | null) => {
       this.loadRepositories(result);
       this.isLoading = false;
     },
@@ -72,9 +71,9 @@ export class RepositoriesPage implements OnInit {
     });
   }
 
-  loadRepositories(result?: IRepositoryFetchResult | null) {
+  loadRepositories(result: IRepositoryFetchResult | null) {
     if (result) {
-      this.repositories = (this.repositories) ? [... this.repositories, ... result.repositories] : [... result.repositories];
+      this.repositories = [...result.repositories];
       this.totalRepositories = result.totalCount;
       this.hasNextPage = result.hasNextPage;
       this.parameters.cursor = result.cursor;
@@ -84,7 +83,7 @@ export class RepositoriesPage implements OnInit {
 
   loadMoreRepositories(event: { target: any; }) {
     this.isLoading = true;
-    this.repositoryService.getMoreRepositories(this.parameters.cursor ?? '').subscribe((result: any) => {
+    this.repositoryService.getMoreRepositories(this.parameters.cursor).subscribe(() => {
       event.target.complete();
     });
   }
@@ -93,8 +92,10 @@ export class RepositoriesPage implements OnInit {
     this.repositories = null;
     this.parameters.cursor =  null;
     this.content.scrollToTop();
-    const result = this.repositoryService.updateVariables(this.parameters);
-    this.loadRepositories(result);
+    this.isLoading = true;
+    this.repositoryService.updateVariables(this.parameters).subscribe((result: IRepositoryFetchResult | null) => {
+      this.loadRepositories(result);
+    });
   }
 
   private watchSort() {

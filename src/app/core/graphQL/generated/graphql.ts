@@ -17764,13 +17764,34 @@ export type GetRepositoriesQuery = (
   )> }
 );
 
+export type GetRepositoriesFromCacheQueryVariables = Exact<{
+  login: Scalars['String'];
+  fetch: Scalars['Int'];
+  cursor?: Maybe<Scalars['String']>;
+  sortBy: RepositoryOrderField;
+  orderBy: OrderDirection;
+}>;
+
+
+export type GetRepositoriesFromCacheQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'login'>
+    & { repositories: (
+      { __typename?: 'RepositoryConnection' }
+      & UserRepositoriesFragment
+    ) }
+  )> }
+);
+
 export type UserRepositoriesFragment = (
   { __typename?: 'RepositoryConnection' }
   & Pick<RepositoryConnection, 'totalCount'>
   & { nodes?: Maybe<Array<Maybe<(
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'isPrivate' | 'updatedAt' | 'createdAt'>
-    & { repositoryLanguages?: Maybe<(
+    & { languages?: Maybe<(
       { __typename?: 'LanguageConnection' }
       & Pick<LanguageConnection, 'totalSize'>
       & { edges?: Maybe<Array<Maybe<(
@@ -17895,7 +17916,7 @@ export const UserRepositoriesFragmentDoc = gql`
     isPrivate
     updatedAt
     createdAt
-    repositoryLanguages: languages(first: 20) {
+    languages(first: 20) {
       edges {
         node {
           name
@@ -17959,6 +17980,24 @@ export const GetRepositoriesDocument = gql`
   })
   export class GetRepositoriesGQL extends Apollo.Query<GetRepositoriesQuery, GetRepositoriesQueryVariables> {
     document = GetRepositoriesDocument;
+    
+  }
+export const GetRepositoriesFromCacheDocument = gql`
+    query getRepositoriesFromCache($login: String!, $fetch: Int!, $cursor: String, $sortBy: RepositoryOrderField!, $orderBy: OrderDirection!) {
+  user(login: $login) {
+    login
+    repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) @client {
+      ...userRepositories
+    }
+  }
+}
+    ${UserRepositoriesFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetRepositoriesFromCacheGQL extends Apollo.Query<GetRepositoriesFromCacheQuery, GetRepositoriesFromCacheQueryVariables> {
+    document = GetRepositoriesFromCacheDocument;
     
   }
 export const GetUsersDocument = gql`

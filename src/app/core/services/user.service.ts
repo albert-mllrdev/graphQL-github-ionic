@@ -15,7 +15,6 @@ import {
   UnfollowUserGQL,
   GetUsersFromCacheGQL,
   UserAvatarFragmentDoc,
-  GetUsersFromCacheQuery,
   User
 } from '@albert/generatedGQL/graphql';
 
@@ -99,6 +98,7 @@ export class UserService {
   updateVariables(parameters: IUserListParameter) {
     const variables = this.getVariables(parameters);
     this.getUsersQueryRef.setVariables(variables);
+    variables.cursor = null;
     this.provideData = true;
     return this.getUsersFromCacheGQL.fetch(variables).pipe(
       map(cachedResult => {
@@ -111,11 +111,11 @@ export class UserService {
     ));
   }
 
-  private parseUserData(data: GetUsersFromCacheQuery) {
-    const users: IUser[] = [];
+  private parseUserData(data: GetUsersQuery) {
     if (!data.search.nodes){
       return null;
     }
+    const users: IUser[] = [];
     data.search.nodes.map(node => {
       const nodeUser = (node as User);
       const user: IUser = {... nodeUser };

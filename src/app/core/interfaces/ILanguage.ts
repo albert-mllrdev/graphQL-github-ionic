@@ -1,5 +1,5 @@
 export interface ILanguage {
     name: string;
-    color: string;
-    usage: string;
+    color?: string | null;
+    usage?: string | null;
 }

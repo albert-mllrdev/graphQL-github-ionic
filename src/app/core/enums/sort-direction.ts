@@ -1,9 +1,6 @@
-export enum SortDirection {
-    ASC = 'ASC',
-    DESC = 'DESC'
-}
+import { OrderDirection } from '../graphQL/generated/graphql';
 
 export const SortDirectionLabel = new Map<string, string>([
-    [SortDirection.ASC, 'Ascending'],
-    [SortDirection.DESC, 'Descending'],
+    [OrderDirection.Asc, 'Ascending'],
+    [OrderDirection.Desc, 'Descending'],
 ]);

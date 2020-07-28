@@ -7,6 +7,15 @@ query getRepositories ($login: String!, $fetch: Int!, $cursor: String, $sortBy: 
     }
 }
 
+query getRepositoriesFromCache ($login: String!, $fetch: Int!, $cursor: String, $sortBy: RepositoryOrderField!, $orderBy: OrderDirection!) {
+  user(login: $login) {
+        login
+        repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) @client {
+            ...userRepositories
+        }
+    }
+}
+
 fragment userRepositories on RepositoryConnection {
     nodes {
         id
@@ -14,7 +23,7 @@ fragment userRepositories on RepositoryConnection {
         isPrivate
         updatedAt
         createdAt
-        repositoryLanguages: languages(first: 20) {
+        languages(first: 20) {
           edges {
             node {
               name
@@ -24,7 +33,7 @@ fragment userRepositories on RepositoryConnection {
           }
           totalSize
         }
-      }
+    }
     totalCount
     pageInfo {
         hasNextPage
