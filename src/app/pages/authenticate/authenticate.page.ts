@@ -21,7 +21,7 @@ export class AuthenticatePage implements OnInit {
 
   authenticate() {
     const code = this.route.snapshot.queryParams.code;
-    this.authenticateService.authenticate(code).subscribe((result: any) => {
+    this.authenticateService.authenticate(code).subscribe(result => {
       if (!result.access_token){
         this.router.navigate(['/login']);
       } else {

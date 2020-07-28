@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@albert/environments/environment';
+import { IAuthenticationResponse } from '@albert/interfaces/IAuthenticationResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class AuthenticateService {
 
   constructor(private httpClient: HttpClient) { }
 
-  authenticate(githubCode: string): Observable<any> {
-    return this.httpClient.post<string>('/githubAuth/login/oauth/access_token',
+  authenticate(githubCode: string): Observable<IAuthenticationResponse> {
+    return this.httpClient.post<IAuthenticationResponse>('/githubAuth/login/oauth/access_token',
     {
       client_id: environment.GITHUB_CLIENT_ID,
       client_secret: environment.GITHUB_SECRET,
@@ -28,7 +29,7 @@ export class AuthenticateService {
       },
       withCredentials: true
     }).pipe(
-      map((result: any) => {
+      map(result => {
          return result;
       })
     );

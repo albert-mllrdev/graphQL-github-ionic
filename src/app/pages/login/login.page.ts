@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { environment } from '@albert/environments/environment';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { environment } from '@albert/environments/environment';
 })
 export class LoginPage implements OnInit {
   hasAPIKeys = false;
-  constructor() { }
+  constructor(private iab: InAppBrowser) { }
 
   ngOnInit() {
     this.checkPresentKeys();
@@ -25,7 +26,8 @@ export class LoginPage implements OnInit {
       window.open(url, '_self');
     }
     else {
-      window.open(url, '_system');
+      // window.open(url, '_system');
+      this.iab.create(url);
     }
   }
 }

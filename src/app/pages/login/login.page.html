@@ -10,9 +10,11 @@
     <ng-container *ngIf="hasAPIKeys">
       <ion-text>  Please login with your <strong>GitHub account</strong>.</ion-text><br><br>
       <ion-button (click)="logIn()">Login</ion-button>
-      <br><br><br> 
+      <br><br><br>
+      or 
+      <br>
     </ng-container>
-    <ion-text>update GITHUB_AUTH_TOKEN in environment.ts</ion-text>
+    <ion-text>update environment.ts GITHUB_AUTH_TOKEN</ion-text>
   </ion-list>
 </ion-content>
 

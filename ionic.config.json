@@ -1,5 +1,11 @@
 {
   "name": "graphQL-github-ionic",
   "integrations": {},
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/githubAuth",
+      "proxyUrl": "https://github.com"
+    }
+  ]
 }
