@@ -13,7 +13,7 @@ import { ListInfiniteScrollComponent } from '@albert/shared/list-infinite-scroll
 import { UserListSkeletonComponent } from './user-list/user-list-skeleton/user-list-skeleton.component';
 import { UserListSortComponent } from './user-list/user-list-sort/user-list-sort.component';
 import { UserListSearchComponent } from './user-list/user-list-search/user-list-search.component';
-import { ShortNumberPipe } from 'src/app/pipes/short-number.pipe';
+import { ShortNumberPipe } from '@albert/pipes/short-number.pipe';
 
 @NgModule({
   imports: [

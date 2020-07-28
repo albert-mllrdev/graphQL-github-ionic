@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticateService } from '@albert/core/authenticate.service';
+import { AuthenticateService } from '@albert/services/authenticate.service';
 import { environment } from '@albert/environments/environment';
 
 @Component({

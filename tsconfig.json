@@ -24,12 +24,14 @@
       "@albert/core/*": ["./src/app/core/*"],
       "@albert/enums/*": ["./src/app/core/enums/*"],
       "@albert/interfaces/*": ["./src/app/core/interfaces/*"],
-      "@albert/data/*": ["./src/app/core/data/*"],
+      "@albert/services/*": ["./src/app/core/services/*"],
       "@albert/queries/*": ["./src/app/core/graphQL/queries/*"], 
       "@albert/mutations/*": ["./src/app/core/graphQL/mutations/*"],      
       "@albert/environments/*": ["./src/environments/*"],
       "@albert/shared/*": ["./src/app/shared/*"],
       "@albert/graphQL/*": ["./src/app/core/graphQL/*"],
+      "@albert/pipes/*": ["./src/app/core/pipes/*"],
+      "@albert/generatedGQL/*": ["./src/app/core/graphQL/generated/*"],
     }
   },
   "angularCompilerOptions": {

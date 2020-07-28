@@ -2,6 +2,6 @@ import { IUser } from './IUser';
 
 export interface IUserFetchResult {
     users: IUser[];
-    hasNextPage: true;
+    hasNextPage: boolean;
     cursor?: string | null;
 }

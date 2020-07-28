@@ -2,10 +2,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { RepositorySortItem } from '@albert/enums/repository-sort-item';
 import { SortDirection } from '@albert/enums/sort-direction';
-import { EnumService } from 'src/app/core/data/enum.service';
-import { LocalService } from '@albert/core/local.service';
+import { EnumService } from '@albert/services/enum.service';
+import { LocalService } from '@albert/services/local.service';
 import { FormBuilder } from '@angular/forms';
-import { ISortItem } from '@albert/core/interfaces/ISortItem';
+import { ISortItem } from '@albert/interfaces/ISortItem';
 
 @Component({
   selector: 'app-repository-list-sort',

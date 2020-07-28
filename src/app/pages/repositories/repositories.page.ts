@@ -4,12 +4,12 @@ import { IonContent } from '@ionic/angular';
 
 import { IRepository } from '@albert/interfaces/IRepository';
 import { IUser } from '@albert/interfaces/IUser';
-import { RepositoryService } from 'src/app/core/data/repository.service';
+import { RepositoryService } from '@albert/services/repository.service';
 import { environment } from '@albert/environments/environment';
 import { RepositorySortItem } from '@albert/enums/repository-sort-item';
 import { SortDirection } from '@albert/enums/sort-direction';
-import { LocalService } from '@albert/core/local.service';
-import { UserService } from '@albert/core/data/user.service';
+import { LocalService } from '@albert/services/local.service';
+import { UserService } from '@albert/services/user.service';
 import { IRepositoryFetchResult } from '@albert/core/interfaces/IRepositoryFetchResult';
 import { IRepositoryListParameter } from '@albert/core/interfaces/IRepositoryListParameter';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { LocalService } from '@albert/core/local.service';
+import { LocalService } from '@albert/services/local.service';
 
 @Component({
   selector: 'app-user-list-search',

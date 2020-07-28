@@ -19,9 +19,11 @@ export class RepositoryService {
   repositoryQuery!: QueryRef<any>;
   provideData = true;
 
-  constructor(private apollo: Apollo) {  }
+  constructor(
+    private apollo: Apollo) {  }
 
   initialize(parameters: IRepositoryListParameter) {
+
     this.repositoryQuery = this.apollo.watchQuery<any>({
       query: getRepositoriesQuery,
       variables: this.getVariables(parameters)

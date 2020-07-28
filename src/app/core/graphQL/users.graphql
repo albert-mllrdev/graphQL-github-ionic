@@ -1,0 +1,63 @@
+query getUsers ($fetch: Int!, $cursor: String, $searchQuery: String!, $getCreatedDate: Boolean = true, $countFollowers: Boolean = false, $countRepositories: Boolean = false) {
+  search(query: $searchQuery, type: USER, first: $fetch, after: $cursor) {
+    ...searchNodes
+  }
+}
+
+query getUsersFromCache ($fetch: Int!, $cursor: String, $searchQuery: String!, $getCreatedDate: Boolean = true, $countFollowers: Boolean = false, $countRepositories: Boolean = false) {
+  search(query: $searchQuery, type: USER, first: $fetch, after: $cursor) @client {
+    ...searchNodes
+  }
+}
+
+fragment searchNodes on SearchResultItemConnection {
+  nodes {
+    ... on User {
+      id
+      name
+      login
+      avatarUrl
+      viewerIsFollowing
+      createdAt @include(if: $getCreatedDate)
+      followers @include(if: $countFollowers) {
+        totalCount
+      }
+      repositories @include(if: $countRepositories) {
+        totalCount
+      }
+    }
+  }
+  pageInfo {
+    hasNextPage
+    endCursor
+  }
+} 
+
+mutation followUser($userId: ID!) {
+  followUser(input: {userId: $userId}) {
+    user {
+      id
+      viewerIsFollowing
+      followers {
+        totalCount
+      }
+    }
+  }
+}
+
+mutation unfollowUser($userId: ID!) {
+  unfollowUser(input: {userId: $userId}) {
+    user {
+      id
+      viewerIsFollowing
+      followers {
+        totalCount
+      }
+    }
+  }
+}
+
+fragment userAvatar on User {
+  id
+  avatarUrl
+}

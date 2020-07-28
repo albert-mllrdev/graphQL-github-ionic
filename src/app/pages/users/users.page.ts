@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
-
-import { IUser } from '@albert/interfaces/IUser';
-import { UserService } from '@albert/data/user.service';
-import { LocalService } from '@albert/core/local.service';
 import { Router } from '@angular/router';
-import { IUserListParameter } from '@albert/core/interfaces/IUserListParameter';
+
 import { environment } from '@albert/environments/environment';
+import { IUser } from '@albert/interfaces/IUser';
+import { UserService } from '@albert/services/user.service';
+import { LocalService } from '@albert/services/local.service';
+import { IUserListParameter } from '@albert/core/interfaces/IUserListParameter';
 import { UserSortItem } from '@albert/core/enums/user-sort-item';
 import { IUserFetchResult } from '@albert/core/interfaces/IUserFetchResult';
 
@@ -42,7 +42,7 @@ export class UsersPage implements OnInit {
   initializeUsers() {
     this.isLoading = true;
     this.userService.initialize(this.parameters);
-    this.userService.getUsers().subscribe((result: any) => {
+    this.userService.loadUsers().subscribe((result: any) => {
       this.loadUsers(result);
       this.isLoading = false;
     },
@@ -55,15 +55,16 @@ export class UsersPage implements OnInit {
 
   loadUsers(result?: IUserFetchResult | null){
     if (result) {
-      this.users = (this.users) ? [... this.users, ... result.users] : [... result.users];
+      this.users =  [... result.users];
       this.hasNextPage = result.hasNextPage;
+      this.parameters.cursor = result.cursor;
     }
   }
 
   loadMoreUsers(event: { target: any; }) {
     this.isLoading = true;
-    this.userService.getMoreUsers().subscribe((result: any) => {
-    event.target.complete();
+    this.userService.loadMoreUsers(this.parameters.cursor).subscribe((result: any) => {
+      event.target.complete();
     });
   }
 
@@ -71,8 +72,9 @@ export class UsersPage implements OnInit {
     this.users = null;
     this.parameters.cursor =  null;
     this.content.scrollToTop();
-    const result = this.userService.updateVariables(this.parameters);
-    this.loadUsers(result);
+    this.userService.updateVariables(this.parameters).subscribe((result?: IUserFetchResult | null) => {
+      this.loadUsers(result);
+    });
   }
 
   private watchSortSearch() {

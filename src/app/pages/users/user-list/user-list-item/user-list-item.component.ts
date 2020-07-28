@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { IUser } from '@albert/interfaces/IUser';
-import { UserService } from '@albert/core/data/user.service';
+import { UserService } from '@albert/services/user.service';
 
 @Component({
   selector: 'app-user-list-item',
@@ -21,11 +21,15 @@ export class UserListItemComponent implements OnInit {
 
   follow($event: any, user: IUser){
     $event.stopPropagation();
-    this.userService.followUser(user);
+    this.userService.followUser(user.id).subscribe((result: any) => {
+      user.viewerIsFollowing = result.data.followUser.user.viewerIsFollowing;
+    });
   }
 
   unfollow($event: any,  user: IUser){
     $event.stopPropagation();
-    this.userService.unfollowUser(user);
+    this.userService.unfollowUser(user.id).subscribe((result: any) => {
+      user.viewerIsFollowing = result.data.followUser.user.viewerIsFollowing;
+    });
   }
 }
