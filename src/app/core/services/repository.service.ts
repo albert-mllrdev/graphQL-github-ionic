@@ -3,12 +3,10 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-// import { getRepositoriesQuery } from '@albert/queries/repositories.query';
 import { IRepository } from '@albert/interfaces/IRepository';
 import { ILanguage } from '@albert/interfaces/ILanguage';
 import { IRepositoryListParameter } from '@albert/interfaces/IRepositoryListParameter';
 import { IRepositoryFetchResult } from '@albert/interfaces/IRepositoryFetchResult';
-
 import {
   GetRepositoriesGQL,
   GetRepositoriesFromCacheGQL,
@@ -17,9 +15,7 @@ import {
   RepositoryOrderField,
   OrderDirection,
   Repository,
-  LanguageConnection,
-  LanguageEdge
-  // User
+  LanguageConnection
 } from '@albert/generatedGQL/graphql';
 
 @Injectable({

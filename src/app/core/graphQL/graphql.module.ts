@@ -3,14 +3,14 @@ import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
-import { environment } from '@albert/environments/environment';
 
+import { environment } from '@albert/environments/environment';
 import {
   setUserSort,
   setUserSearch,
   setRepositorySort,
   setRepositorySortDirection
-} from '@albert/core/graphQL/resolvers/mutations';
+} from '@albert/resolvers/mutations';
 
 export function createApollo(httpLink: HttpLink) {
   const Link =  httpLink.create({

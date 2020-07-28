@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { IUser } from '@albert/interfaces/IUser';
 import { UserService } from '@albert/services/user.service';
-import { User } from '@albert/core/graphQL/generated/graphql';
 
 @Component({
   selector: 'app-user-list-item',

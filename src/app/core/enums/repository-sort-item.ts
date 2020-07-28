@@ -1,4 +1,4 @@
-import { RepositoryOrderField } from '../graphQL/generated/graphql';
+import { RepositoryOrderField } from '@albert/generatedGQL/graphql';
 
 export const RepositorySortItemLabel = new Map<string, string>([
     [RepositoryOrderField.Name, 'Sort by Name'],

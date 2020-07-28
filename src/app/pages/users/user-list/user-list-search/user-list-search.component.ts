@@ -1,6 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CacheService } from '@albert/core/services/cache.service';
+
+import { CacheService } from '@albert/services/cache.service';
 
 @Component({
   selector: 'app-user-list-search',

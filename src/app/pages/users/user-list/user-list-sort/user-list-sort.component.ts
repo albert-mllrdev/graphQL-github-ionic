@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 import { EnumService } from '@albert/services/enum.service';
-import { CacheService } from '@albert/core/services/cache.service';
-import { FormControl } from '@angular/forms';
-import { ISortItem } from '@albert/core/interfaces/ISortItem';
+import { CacheService } from '@albert/services/cache.service';
+import { ISortItem } from '@albert/interfaces/ISortItem';
 import { environment } from '@albert/environments/environment';
 
 @Component({

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { RepositorySortItemLabel } from '@albert/enums/repository-sort-item';
 import { SortDirectionLabel } from '@albert/enums/sort-direction';
 import { UserSortItem, UserSortItemLabel } from '@albert/enums/user-sort-item';

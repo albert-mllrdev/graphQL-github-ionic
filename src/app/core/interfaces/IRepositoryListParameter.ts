@@ -1,4 +1,4 @@
-import { OrderDirection, RepositoryOrderField } from '../graphQL/generated/graphql';
+import { OrderDirection, RepositoryOrderField } from '@albert/generatedGQL/graphql';
 
 export interface IRepositoryListParameter {
     login: string;

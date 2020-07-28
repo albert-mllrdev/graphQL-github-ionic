@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 import { UserSortItem } from '@albert/enums/user-sort-item';
-import { RepositoryOrderField, OrderDirection } from '@albert/generatedGQL/graphql';
 import {
   GetUserSortGQL,
   SetUserSortGQL,
@@ -12,7 +11,9 @@ import {
   SetRepositorySortGQL,
   GetRepositorySortDirectionGQL,
   SetRepositorySortDirectionGQL,
-  GetUserAvatarFromCacheGQL
+  GetUserAvatarFromCacheGQL,
+  RepositoryOrderField,
+  OrderDirection
 } from '@albert/generatedGQL/graphql';
 
 @Injectable({

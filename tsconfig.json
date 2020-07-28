@@ -21,7 +21,6 @@
       "esnext.asynciterable"
     ],
     "paths": {
-      "@albert/core/*": ["./src/app/core/*"],
       "@albert/enums/*": ["./src/app/core/enums/*"],
       "@albert/interfaces/*": ["./src/app/core/interfaces/*"],
       "@albert/services/*": ["./src/app/core/services/*"],
@@ -32,6 +31,7 @@
       "@albert/graphQL/*": ["./src/app/core/graphQL/*"],
       "@albert/pipes/*": ["./src/app/core/pipes/*"],
       "@albert/generatedGQL/*": ["./src/app/core/graphQL/generated/*"],
+      "@albert/resolvers/*": ["./src/app/core/graphQL/resolvers/*"],
     }
   },
   "angularCompilerOptions": {

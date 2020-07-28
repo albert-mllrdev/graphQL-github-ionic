@@ -3,11 +3,11 @@ import { IonContent } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 import { environment } from '@albert/environments/environment';
-import { IUser } from '@albert/interfaces/IUser';
 import { UserService } from '@albert/services/user.service';
-import { CacheService } from '@albert/core/services/cache.service';
-import { IUserListParameter } from '@albert/core/interfaces/IUserListParameter';
-import { IUserFetchResult } from '@albert/core/interfaces/IUserFetchResult';
+import { CacheService } from '@albert/services/cache.service';
+import { IUser } from '@albert/interfaces/IUser';
+import { IUserListParameter } from '@albert/interfaces/IUserListParameter';
+import { IUserFetchResult } from '@albert/interfaces/IUserFetchResult';
 
 @Component({
   selector: 'app-users',

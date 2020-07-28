@@ -2,13 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 
-import { IRepository } from '@albert/interfaces/IRepository';
-import { RepositoryService } from '@albert/services/repository.service';
 import { environment } from '@albert/environments/environment';
-import { CacheService } from '@albert/core/services/cache.service';
-import { UserService } from '@albert/services/user.service';
-import { IRepositoryFetchResult } from '@albert/core/interfaces/IRepositoryFetchResult';
-import { IRepositoryListParameter } from '@albert/core/interfaces/IRepositoryListParameter';
+import { RepositoryService } from '@albert/services/repository.service';
+import { CacheService } from '@albert/services/cache.service';
+import { IRepository } from '@albert/interfaces/IRepository';
+import { IRepositoryFetchResult } from '@albert/interfaces/IRepositoryFetchResult';
+import { IRepositoryListParameter } from '@albert/interfaces/IRepositoryListParameter';
 
 @Component({
   selector: 'app-repositories',

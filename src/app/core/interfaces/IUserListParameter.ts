@@ -1,4 +1,4 @@
-import { UserSortItem } from '../enums/user-sort-item';
+import { UserSortItem } from '@albert/enums/user-sort-item';
 
 export interface IUserListParameter {
     cursor?: string | null;
