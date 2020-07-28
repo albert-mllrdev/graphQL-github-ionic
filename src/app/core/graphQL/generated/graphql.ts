@@ -6418,6 +6418,10 @@ export type Mutation = {
   resolveReviewThread?: Maybe<ResolveReviewThreadPayload>;
   /** Creates or updates the identity provider for an enterprise. */
   setEnterpriseIdentityProvider?: Maybe<SetEnterpriseIdentityProviderPayload>;
+  setRepositorySort?: Maybe<Scalars['String']>;
+  setRepositorySortDirection?: Maybe<Scalars['String']>;
+  setUserSearch?: Maybe<Scalars['String']>;
+  setUserSort?: Maybe<Scalars['String']>;
   /** Submits a pending pull request review. */
   submitPullRequestReview?: Maybe<SubmitPullRequestReviewPayload>;
   /** Transfer an issue to a different repository */
@@ -6924,6 +6928,30 @@ export type MutationResolveReviewThreadArgs = {
 /** The root query for implementing GraphQL mutations. */
 export type MutationSetEnterpriseIdentityProviderArgs = {
   input: SetEnterpriseIdentityProviderInput;
+};
+
+
+/** The root query for implementing GraphQL mutations. */
+export type MutationSetRepositorySortArgs = {
+  input: Scalars['String'];
+};
+
+
+/** The root query for implementing GraphQL mutations. */
+export type MutationSetRepositorySortDirectionArgs = {
+  input: Scalars['String'];
+};
+
+
+/** The root query for implementing GraphQL mutations. */
+export type MutationSetUserSearchArgs = {
+  input: Scalars['String'];
+};
+
+
+/** The root query for implementing GraphQL mutations. */
+export type MutationSetUserSortArgs = {
+  input: Scalars['String'];
 };
 
 
@@ -11106,6 +11134,8 @@ export type Query = {
   repository?: Maybe<Repository>;
   /** Lookup a repository owner (ie. either a User or an Organization) by login. */
   repositoryOwner?: Maybe<RepositoryOwner>;
+  repositorySort: Scalars['String'];
+  repositorySortDirection: Scalars['String'];
   /** Lookup resource by a URL. */
   resource?: Maybe<UniformResourceLocatable>;
   /** Perform a search across resources. */
@@ -11125,6 +11155,8 @@ export type Query = {
   topic?: Maybe<Topic>;
   /** Lookup a user by login. */
   user?: Maybe<User>;
+  userSearch: Scalars['String'];
+  userSort: Scalars['String'];
   /** The currently authenticated user. */
   viewer: User;
 };
@@ -17743,6 +17775,91 @@ export type ViewerHovercardContext = HovercardContext & {
 };
 
 
+export type GetUserSortQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserSortQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'userSort'>
+);
+
+export type SetUserSortMutationVariables = Exact<{
+  input: Scalars['String'];
+}>;
+
+
+export type SetUserSortMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'setUserSort'>
+);
+
+export type GetUserSearchQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserSearchQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'userSearch'>
+);
+
+export type SetUserSearchMutationVariables = Exact<{
+  input: Scalars['String'];
+}>;
+
+
+export type SetUserSearchMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'setUserSearch'>
+);
+
+export type GetRepositorySortQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetRepositorySortQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'repositorySort'>
+);
+
+export type SetRepositorySortMutationVariables = Exact<{
+  input: Scalars['String'];
+}>;
+
+
+export type SetRepositorySortMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'setRepositorySort'>
+);
+
+export type GetRepositorySortDirectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetRepositorySortDirectionQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'repositorySortDirection'>
+);
+
+export type SetRepositorySortDirectionMutationVariables = Exact<{
+  input: Scalars['String'];
+}>;
+
+
+export type SetRepositorySortDirectionMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'setRepositorySortDirection'>
+);
+
+export type GetUserAvatarFromCacheQueryVariables = Exact<{
+  login: Scalars['String'];
+}>;
+
+
+export type GetUserAvatarFromCacheQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'avatarUrl'>
+  )> }
+);
+
 export type GetRepositoriesQueryVariables = Exact<{
   login: Scalars['String'];
   fetch: Scalars['Int'];
@@ -17903,11 +18020,6 @@ export type UnfollowUserMutation = (
   )> }
 );
 
-export type UserAvatarFragment = (
-  { __typename?: 'User' }
-  & Pick<User, 'id' | 'avatarUrl'>
-);
-
 export const UserRepositoriesFragmentDoc = gql`
     fragment userRepositories on RepositoryConnection {
   nodes {
@@ -17916,7 +18028,7 @@ export const UserRepositoriesFragmentDoc = gql`
     isPrivate
     updatedAt
     createdAt
-    languages(first: 20) {
+    languages(first: 30) {
       edges {
         node {
           name
@@ -17958,12 +18070,125 @@ export const SearchNodesFragmentDoc = gql`
   }
 }
     `;
-export const UserAvatarFragmentDoc = gql`
-    fragment userAvatar on User {
-  id
-  avatarUrl
+export const GetUserSortDocument = gql`
+    query GetUserSort {
+  userSort @client
 }
     `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetUserSortGQL extends Apollo.Query<GetUserSortQuery, GetUserSortQueryVariables> {
+    document = GetUserSortDocument;
+    
+  }
+export const SetUserSortDocument = gql`
+    mutation SetUserSort($input: String!) {
+  setUserSort(input: $input) @client
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SetUserSortGQL extends Apollo.Mutation<SetUserSortMutation, SetUserSortMutationVariables> {
+    document = SetUserSortDocument;
+    
+  }
+export const GetUserSearchDocument = gql`
+    query GetUserSearch {
+  userSearch @client
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetUserSearchGQL extends Apollo.Query<GetUserSearchQuery, GetUserSearchQueryVariables> {
+    document = GetUserSearchDocument;
+    
+  }
+export const SetUserSearchDocument = gql`
+    mutation SetUserSearch($input: String!) {
+  setUserSearch(input: $input) @client
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SetUserSearchGQL extends Apollo.Mutation<SetUserSearchMutation, SetUserSearchMutationVariables> {
+    document = SetUserSearchDocument;
+    
+  }
+export const GetRepositorySortDocument = gql`
+    query GetRepositorySort {
+  repositorySort @client
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetRepositorySortGQL extends Apollo.Query<GetRepositorySortQuery, GetRepositorySortQueryVariables> {
+    document = GetRepositorySortDocument;
+    
+  }
+export const SetRepositorySortDocument = gql`
+    mutation SetRepositorySort($input: String!) {
+  setRepositorySort(input: $input) @client
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SetRepositorySortGQL extends Apollo.Mutation<SetRepositorySortMutation, SetRepositorySortMutationVariables> {
+    document = SetRepositorySortDocument;
+    
+  }
+export const GetRepositorySortDirectionDocument = gql`
+    query GetRepositorySortDirection {
+  repositorySortDirection @client
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetRepositorySortDirectionGQL extends Apollo.Query<GetRepositorySortDirectionQuery, GetRepositorySortDirectionQueryVariables> {
+    document = GetRepositorySortDirectionDocument;
+    
+  }
+export const SetRepositorySortDirectionDocument = gql`
+    mutation SetRepositorySortDirection($input: String!) {
+  setRepositorySortDirection(input: $input) @client
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SetRepositorySortDirectionGQL extends Apollo.Mutation<SetRepositorySortDirectionMutation, SetRepositorySortDirectionMutationVariables> {
+    document = SetRepositorySortDirectionDocument;
+    
+  }
+export const GetUserAvatarFromCacheDocument = gql`
+    query getUserAvatarFromCache($login: String!) {
+  user(login: $login) @client {
+    avatarUrl
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetUserAvatarFromCacheGQL extends Apollo.Query<GetUserAvatarFromCacheQuery, GetUserAvatarFromCacheQueryVariables> {
+    document = GetUserAvatarFromCacheDocument;
+    
+  }
 export const GetRepositoriesDocument = gql`
     query getRepositories($login: String!, $fetch: Int!, $cursor: String, $sortBy: RepositoryOrderField!, $orderBy: OrderDirection!) {
   user(login: $login) {

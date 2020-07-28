@@ -2,8 +2,9 @@ overwrite: true
 schema:
   - https://api.github.com/graphql:
       headers:
-        Authorization: "token 8d31c7703d683c05b13d72940e8dcbee535d7755"
-documents: "src/app/core/graphQL/*.graphql"
+        Authorization: 'token 151fc5fa1bf985cedfb53304460afd3b94679328'
+  - 'src/app/core/graphQL/*.graphql'
+documents: 'src/app/core/graphQL/*.graphql'
 generates:
   src/app/core/graphQL/generated/graphql.ts:
     plugins:

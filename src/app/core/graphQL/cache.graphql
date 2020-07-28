@@ -1,0 +1,51 @@
+extend type Query {
+  userSort: String!  
+  userSearch: String!
+  repositorySort: String!
+  repositorySortDirection: String!
+}
+
+extend type Mutation {
+  setUserSort(input: String!): String
+  setUserSearch(input: String!): String
+  setRepositorySort(input: String!): String
+  setRepositorySortDirection(input: String!): String
+}
+
+query GetUserSort {
+  userSort @client
+}
+
+mutation SetUserSort($input: String!) {
+  setUserSort(input: $input) @client
+}
+
+query GetUserSearch {
+  userSearch @client
+}
+
+mutation SetUserSearch($input: String!) {
+  setUserSearch(input: $input) @client
+}
+
+query GetRepositorySort {
+  repositorySort @client
+}
+
+mutation SetRepositorySort($input: String!) {
+  setRepositorySort(input: $input) @client
+}
+
+query GetRepositorySortDirection {
+  repositorySortDirection @client
+}
+
+mutation SetRepositorySortDirection($input: String!) {
+  setRepositorySortDirection(input: $input) @client
+}
+
+query getUserAvatarFromCache ($login: String!) {
+  user(login: $login) @client {
+    avatarUrl
+  }
+}

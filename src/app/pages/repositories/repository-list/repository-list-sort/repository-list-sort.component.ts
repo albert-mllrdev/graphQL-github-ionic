@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { EnumService } from '@albert/services/enum.service';
-import { LocalService } from '@albert/services/local.service';
+import { CacheService } from '@albert/core/services/cache.service';
 import { FormBuilder } from '@angular/forms';
 import { ISortItem } from '@albert/interfaces/ISortItem';
-import { RepositoryOrderField, OrderDirection } from '@albert/generatedGQL/graphql';
+import { environment } from '@albert/environments/environment';
 
 @Component({
   selector: 'app-repository-list-sort',
@@ -13,8 +13,8 @@ import { RepositoryOrderField, OrderDirection } from '@albert/generatedGQL/graph
 })
 export class RepositoryListSortComponent implements OnInit {
   sortForm = this.formBuilder.group({
-    sort: [RepositoryOrderField.Name],
-    direction: [OrderDirection.Asc]
+    sort: [environment.DEFAULT_REPOSITORY_SORT],
+    direction: [environment.DEFAULT_REPOSITORY_DIRECTION]
   });
 
   sortItems: ISortItem[] = [];
@@ -22,7 +22,7 @@ export class RepositoryListSortComponent implements OnInit {
 
   constructor(
     private enumService: EnumService,
-    private localService: LocalService,
+    private cacheService: CacheService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -30,12 +30,15 @@ export class RepositoryListSortComponent implements OnInit {
   }
 
   setSortItems() {
-    this.setSort();
     this.sortItems = this.enumService.getRepositorySortItems();
     this.sortDirections = this.enumService.getSortDirections();
   }
 
-  setSort(){
-    this.localService.setRepositorySort(this.sortForm.value.sort, this.sortForm.value.direction);
+  setSort() {
+    this.cacheService.setRepositorySort(this.sortForm.value.sort);
+  }
+
+  setSortDirection() {
+    this.cacheService.setRepositorySortDirection(this.sortForm.value.direction);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Apollo, QueryRef } from 'apollo-angular';
+import { QueryRef } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { Observable, from } from 'rxjs';
 
@@ -14,7 +14,6 @@ import {
   FollowUserGQL,
   UnfollowUserGQL,
   GetUsersFromCacheGQL,
-  UserAvatarFragmentDoc,
   User
 } from '@albert/generatedGQL/graphql';
 
@@ -26,7 +25,6 @@ export class UserService {
   provideData = true;
 
   constructor(
-    private apollo: Apollo,
     private getUsersGQL: GetUsersGQL,
     private getUsersFromCacheGQL: GetUsersFromCacheGQL,
     private followUserGQL: FollowUserGQL,
@@ -76,13 +74,6 @@ export class UserService {
         return result;
       })
     );
-  }
-
-  getUserFromCache(login: string) {
-    return this.apollo.getClient().readFragment({
-      id: `User:${login}`,
-      fragment: UserAvatarFragmentDoc
-    });
   }
 
   unfollowUser(id: string) {

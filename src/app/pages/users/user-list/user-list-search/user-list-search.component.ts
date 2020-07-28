@@ -1,6 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { LocalService } from '@albert/services/local.service';
+import { CacheService } from '@albert/core/services/cache.service';
 
 @Component({
   selector: 'app-user-list-search',
@@ -10,12 +10,12 @@ import { LocalService } from '@albert/services/local.service';
 export class UserListSearchComponent implements OnInit {
   searchControl = new FormControl();
 
-  constructor(private localService: LocalService) { }
+  constructor(private cacheService: CacheService) { }
 
   ngOnInit() {}
 
   setSearch() {
      this.searchControl.setValue(this.searchControl.value.trim());
-     this.localService.setUserSearch(this.searchControl.value);
+     this.cacheService.setUserSearch(this.searchControl.value);
   }
 }

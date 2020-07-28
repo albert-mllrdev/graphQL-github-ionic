@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EnumService } from '@albert/services/enum.service';
-import { LocalService } from '@albert/services/local.service';
+import { CacheService } from '@albert/core/services/cache.service';
 import { FormControl } from '@angular/forms';
 import { ISortItem } from '@albert/core/interfaces/ISortItem';
-import { UserSortItem } from '@albert/core/enums/user-sort-item';
+import { environment } from '@albert/environments/environment';
 
 @Component({
   selector: 'app-user-list-sort',
@@ -12,23 +12,22 @@ import { UserSortItem } from '@albert/core/enums/user-sort-item';
   styleUrls: ['./user-list-sort.component.scss'],
 })
 export class UserListSortComponent implements OnInit {
-  sortControl = new FormControl(UserSortItem.JOINED_ASC);
+  sortControl = new FormControl(environment.DEFAULT_USER_SORT);
   sortItems: ISortItem[] = [];
 
   constructor(
     private enumService: EnumService,
-    private localService: LocalService) { }
+    private cacheService: CacheService) { }
 
   ngOnInit() {
     this.setSortItems();
   }
 
   setSortItems() {
-    this.setSort();
     this.sortItems = this.enumService.getUserSortItems();
   }
 
   setSort() {
-    this.localService.setUserSort(this.sortControl.value);
+     this.cacheService.setUserSort(this.sortControl.value);
   }
 }

@@ -4,7 +4,13 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { environment } from '@albert/environments/environment';
-import { graphQLMutations } from '@albert/mutations/graphQL.mutation';
+
+import {
+  setUserSort,
+  setUserSearch,
+  setRepositorySort,
+  setRepositorySortDirection
+} from '@albert/core/graphQL/resolvers/mutations';
 
 export function createApollo(httpLink: HttpLink) {
   const Link =  httpLink.create({
@@ -31,11 +37,25 @@ export function createApollo(httpLink: HttpLink) {
     }
   });
 
+  inMemCache.writeData({
+    data: {
+      userSort: environment.DEFAULT_USER_SORT,
+      userSearch: '',
+      repositorySort: environment.DEFAULT_REPOSITORY_SORT,
+      repositorySortDirection: environment.DEFAULT_REPOSITORY_DIRECTION
+    }
+  });
+
   return {
     link,
     cache: inMemCache,
     resolvers: {
-      Mutation: graphQLMutations
+      Mutation: {
+        setUserSort,
+        setUserSearch,
+        setRepositorySort,
+        setRepositorySortDirection
+      }
     }
   };
 }

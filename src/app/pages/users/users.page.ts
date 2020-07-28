@@ -5,9 +5,8 @@ import { Router } from '@angular/router';
 import { environment } from '@albert/environments/environment';
 import { IUser } from '@albert/interfaces/IUser';
 import { UserService } from '@albert/services/user.service';
-import { LocalService } from '@albert/services/local.service';
+import { CacheService } from '@albert/core/services/cache.service';
 import { IUserListParameter } from '@albert/core/interfaces/IUserListParameter';
-import { UserSortItem } from '@albert/core/enums/user-sort-item';
 import { IUserFetchResult } from '@albert/core/interfaces/IUserFetchResult';
 
 @Component({
@@ -25,13 +24,13 @@ export class UsersPage implements OnInit {
   parameters: IUserListParameter = {
     cursor: null,
     fetch: environment.RECORD_FETCH_COUNT,
-    sortBy: UserSortItem.JOINED_ASC,
+    sortBy: environment.DEFAULT_USER_SORT,
     searchText: ''
   };
 
   constructor(
     private userService: UserService,
-    private localService: LocalService,
+    private cacheService: CacheService,
     private router: Router) { }
 
   ngOnInit() {
@@ -47,7 +46,7 @@ export class UsersPage implements OnInit {
       this.isLoading = false;
     },
     error => {
-      if (error.networkError.status === 401){
+      if (error.networkError && error.networkError.status === 401){
         this.router.navigate(['/login']);
       }
     });
@@ -75,18 +74,19 @@ export class UsersPage implements OnInit {
     this.isLoading = true;
     this.userService.updateVariables(this.parameters).subscribe((result: IUserFetchResult | null) => {
       this.loadUsers(result);
+      this.isLoading = false;
     });
   }
 
   private watchSortSearch() {
-    this.localService.getUserSort().subscribe(result => {
+    this.cacheService.getUserSort().subscribe(result => {
       if (this.users) {
         this.parameters.sortBy = result;
         this.resetFields();
       }
     });
 
-    this.localService.getUserSearch().subscribe(result => {
+    this.cacheService.getUserSearch().subscribe(result => {
       if (this.users) {
         this.parameters.searchText = result;
         this.resetFields();

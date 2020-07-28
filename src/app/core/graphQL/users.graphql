@@ -56,8 +56,3 @@ mutation unfollowUser($userId: ID!) {
     }
   }
 }
-
-fragment userAvatar on User {
-  id
-  avatarUrl
-}
