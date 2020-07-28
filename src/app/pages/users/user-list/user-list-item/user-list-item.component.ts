@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { IUser } from '@albert/interfaces/IUser';
 import { UserService } from '@albert/services/user.service';
+import { User } from '@albert/core/graphQL/generated/graphql';
 
 @Component({
   selector: 'app-user-list-item',
@@ -19,17 +20,21 @@ export class UserListItemComponent implements OnInit {
     return new Date(date);
   }
 
-  follow($event: any, user: IUser){
+  follow($event: Event, user: IUser){
     $event.stopPropagation();
-    this.userService.followUser(user.id).subscribe((result: any) => {
-      user.viewerIsFollowing = result.data.followUser.user.viewerIsFollowing;
+    this.userService.followUser(user.id).subscribe(result => {
+      if (result) {
+        user.viewerIsFollowing  = result.viewerIsFollowing;
+      }
     });
   }
 
-  unfollow($event: any,  user: IUser){
+  unfollow($event: Event,  user: IUser){
     $event.stopPropagation();
-    this.userService.unfollowUser(user.id).subscribe((result: any) => {
-      user.viewerIsFollowing = result.data.followUser.user.viewerIsFollowing;
+    this.userService.unfollowUser(user.id).subscribe(result => {
+      if (result) {
+        user.viewerIsFollowing  = result.viewerIsFollowing;
+      }
     });
   }
 }

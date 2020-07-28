@@ -71,7 +71,10 @@ export class UserService {
       userId: id
     }).pipe(
       map(result => {
-        return result;
+        if (result?.data?.followUser?.user) {
+          return result.data.followUser.user;
+        }
+        return null;
       })
     );
   }
@@ -81,7 +84,10 @@ export class UserService {
       userId: id
     }).pipe(
       map(result => {
-        return result;
+        if (result?.data?.unfollowUser?.user) {
+          return result.data.unfollowUser.user;
+        }
+        return null;
       })
     );
   }
