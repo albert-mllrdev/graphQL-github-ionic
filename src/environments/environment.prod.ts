@@ -1,5 +1,5 @@
-import { UserSortItem } from '@albert/core/enums/user-sort-item';
-import { RepositoryOrderField, OrderDirection } from '@albert/core/graphQL/generated/graphql';
+import { UserSortItem } from '@albert/enums/user-sort-item';
+import { RepositoryOrderField, OrderDirection } from '@albert/generatedGQL/graphql';
 
 export const environment = {
   production: true,

@@ -1,8 +1,8 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { UserSortItem } from '@albert/core/enums/user-sort-item';
-import { RepositoryOrderField, OrderDirection } from '@albert/core/graphQL/generated/graphql';
+import { UserSortItem } from '@albert/enums/user-sort-item';
+import { RepositoryOrderField, OrderDirection } from '@albert/generatedGQL/graphql';
 
 export const environment = {
   production: false,
