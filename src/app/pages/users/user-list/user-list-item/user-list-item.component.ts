@@ -10,7 +10,7 @@ import { UserService } from '@albert/services/user.service';
 })
 export class UserListItemComponent implements OnInit {
   @Input() user!: IUser;
-
+  isChangingFollowStatus = false;
   constructor(private userService: UserService) { }
 
   ngOnInit() {}
@@ -21,19 +21,27 @@ export class UserListItemComponent implements OnInit {
 
   follow($event: Event, user: IUser){
     $event.stopPropagation();
-    this.userService.followUser(user.id).subscribe(result => {
-      if (result) {
-        user.viewerIsFollowing  = result.viewerIsFollowing;
-      }
-    });
+    if (!this.isChangingFollowStatus) {
+      this.isChangingFollowStatus = true;
+      this.userService.followUser(user.id).subscribe(result => {
+        if (result) {
+          user.viewerIsFollowing  = result.viewerIsFollowing;
+        }
+        this.isChangingFollowStatus = false;
+      });
+    }
   }
 
   unfollow($event: Event,  user: IUser){
     $event.stopPropagation();
-    this.userService.unfollowUser(user.id).subscribe(result => {
-      if (result) {
-        user.viewerIsFollowing  = result.viewerIsFollowing;
-      }
-    });
+    if (!this.isChangingFollowStatus) {
+      this.isChangingFollowStatus = true;
+      this.userService.unfollowUser(user.id).subscribe(result => {
+        if (result) {
+          user.viewerIsFollowing  = result.viewerIsFollowing;
+        }
+        this.isChangingFollowStatus = false;
+      });
+    }
   }
 }

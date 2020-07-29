@@ -12,12 +12,15 @@
     <ion-note *ngIf="(user.totalFollowers) || (user.totalFollowers === 0)">around {{user.totalFollowers | shortNumber}} followers</ion-note>
     <ion-note *ngIf=" (user.totalRepositories) || (user.totalRepositories === 0)">{{user.totalRepositories | number :"1.0"}} public repositories</ion-note>
     <br>
-    <ion-chip *ngIf="!user.viewerIsFollowing" (click)="follow($event, user)">
-      <ion-label>Follow</ion-label>
-    </ion-chip>
-    <ion-chip *ngIf="user.viewerIsFollowing" (click)="unfollow($event, user)">
-      <ion-label>Unfollow</ion-label>
-    </ion-chip>
+    <ion-item lines="none" class="ion-no-padding">
+      <ion-chip *ngIf="!user.viewerIsFollowing" (click)="follow($event, user)">
+        <ion-label>Follow</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="user.viewerIsFollowing" (click)="unfollow($event, user)">
+        <ion-label>Unfollow</ion-label>
+      </ion-chip>      
+      <ion-spinner *ngIf="isChangingFollowStatus"></ion-spinner>
+    </ion-item>    
   </ion-label>
   <ion-icon name="arrow-forward" end></ion-icon>
 </ion-item>
