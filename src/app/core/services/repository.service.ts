@@ -96,15 +96,16 @@ export class RepositoryService {
   }
 
   private getVariables(parameters: IRepositoryListParameter) {
+    let orderBy =  parameters.orderBy;
     // direction seems to be reversed on dates, ascending shows oldest first instead of newest
     if (parameters.sortBy === RepositoryOrderField.UpdatedAt || parameters.sortBy === RepositoryOrderField.CreatedAt){
-      parameters.orderBy = (parameters.orderBy === OrderDirection.Asc) ? OrderDirection.Desc : OrderDirection.Asc;
+      orderBy = (orderBy === OrderDirection.Asc) ? OrderDirection.Desc : OrderDirection.Asc;
     }
     return {
       login: parameters.login,
       fetch: parameters.fetch,
       cursor: parameters.cursor,
-      orderBy: parameters.orderBy,
+      orderBy,
       sortBy: parameters.sortBy
     };
   }
