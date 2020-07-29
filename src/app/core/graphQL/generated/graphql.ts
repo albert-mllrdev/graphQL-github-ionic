@@ -18209,9 +18209,9 @@ export const GetRepositoriesDocument = gql`
   }
 export const GetRepositoriesFromCacheDocument = gql`
     query getRepositoriesFromCache($login: String!, $fetch: Int!, $cursor: String, $sortBy: RepositoryOrderField!, $orderBy: OrderDirection!) {
-  user(login: $login) @connection(key: "user") {
+  user(login: $login) @client {
     login
-    repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) @client @connection(key: "repository") {
+    repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) {
       ...userRepositories
     }
   }

@@ -23,7 +23,6 @@ import {
 })
 export class RepositoryService {
   getRepositoriesQueryRef!: QueryRef<GetRepositoriesQuery, GetRepositoriesQueryVariables>;
-  provideData = true;
 
   constructor(
     private getRepositoriesGQL: GetRepositoriesGQL,
@@ -36,17 +35,12 @@ export class RepositoryService {
   getRepositories(): Observable<IRepositoryFetchResult | null> {
     return this.getRepositoriesQueryRef.valueChanges.pipe(
       map(result => {
-        if (!this.provideData) {
-          this.provideData = true;
-          return null;
-        }
         return this.parseRepositoryData(result.data);
       })
     );
   }
 
   getMoreRepositories(cursor?: string | null) {
-    this.provideData = true;
     return from(this.getRepositoriesQueryRef.fetchMore({
       variables : {
         cursor
@@ -70,11 +64,9 @@ export class RepositoryService {
     const variables = this.getVariables(parameters);
     this.getRepositoriesQueryRef.setVariables(variables);
     variables.cursor = null;
-    this.provideData = true;
     return this.getRepositoriesFromCacheGQL.fetch(variables).pipe(
       map(cachedResult => {
         if (cachedResult.data) {
-          this.provideData = false;
           return this.parseRepositoryData(cachedResult.data);
         }
         return null;

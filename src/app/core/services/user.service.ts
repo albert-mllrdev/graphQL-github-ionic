@@ -22,7 +22,6 @@ import {
 })
 export class UserService {
   getUsersQueryRef!: QueryRef<GetUsersQuery, GetUsersQueryVariables>;
-  provideData = true;
 
   constructor(
     private getUsersGQL: GetUsersGQL,
@@ -37,17 +36,12 @@ export class UserService {
   loadUsers(): Observable<IUserFetchResult | null> {
     return this.getUsersQueryRef.valueChanges.pipe(
       map(result => {
-        if (!this.provideData) {
-          this.provideData = true;
-          return null;
-        }
         return this.parseUserData(result.data);
       })
     );
   }
 
   loadMoreUsers(cursor?: string | null) {
-    this.provideData = true;
     return from(this.getUsersQueryRef.fetchMore({
       variables : {
         cursor
@@ -96,11 +90,9 @@ export class UserService {
     const variables = this.getVariables(parameters);
     this.getUsersQueryRef.setVariables(variables);
     variables.cursor = null;
-    this.provideData = true;
     return this.getUsersFromCacheGQL.fetch(variables).pipe(
       map(cachedResult => {
         if (cachedResult.data) {
-          this.provideData = false;
           return this.parseUserData(cachedResult.data);
         }
         return null;
