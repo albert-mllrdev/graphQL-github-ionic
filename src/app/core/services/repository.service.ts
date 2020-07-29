@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Apollo, QueryRef } from 'apollo-angular';
+import { QueryRef } from 'apollo-angular';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -26,7 +26,6 @@ export class RepositoryService {
   provideData = true;
 
   constructor(
-    private apollo: Apollo,
     private getRepositoriesGQL: GetRepositoriesGQL,
     private getRepositoriesFromCacheGQL: GetRepositoriesFromCacheGQL) {  }
 

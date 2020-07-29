@@ -64,7 +64,7 @@ export class RepositoriesPage implements OnInit {
       this.isLoading = false;
     },
     error => {
-      if (error.networkError && error.networkError.status === 401) {
+      if (error?.networkError?.status === 401){
         this.router.navigate(['/login']);
       }
     });
@@ -80,7 +80,7 @@ export class RepositoriesPage implements OnInit {
     }
   }
 
-  loadMoreRepositories(event: { target: any; }) {
+  loadMoreRepositories(event: { target: { complete: () => void; }; }) {
     this.isLoading = true;
     this.repositoryService.getMoreRepositories(this.parameters.cursor).subscribe(() => {
       event.target.complete();
@@ -90,12 +90,11 @@ export class RepositoriesPage implements OnInit {
   private resetFields() {
     this.repositories = null;
     this.parameters.cursor =  null;
-    this.content.scrollToTop();
     this.isLoading = true;
     this.repositoryService.updateVariables(this.parameters).subscribe((result: IRepositoryFetchResult | null) => {
       this.loadRepositories(result);
-      this.isLoading = false;
     });
+    this.content.scrollToTop();
   }
 
   private watchSort() {

@@ -1,42 +1,42 @@
 query getRepositories ($login: String!, $fetch: Int!, $cursor: String, $sortBy: RepositoryOrderField!, $orderBy: OrderDirection!) {
   user(login: $login) {
-        login
-        repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) {
-            ...userRepositories
-        }
+    login
+    repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) {
+      ...userRepositories
     }
+  }
 }
 
 query getRepositoriesFromCache ($login: String!, $fetch: Int!, $cursor: String, $sortBy: RepositoryOrderField!, $orderBy: OrderDirection!) {
-  user(login: $login) @client {
-        login
-        repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) @client {
-            ...userRepositories
-        }
+  user(login: $login) {
+    login
+    repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) @client {
+      ...userRepositories
     }
+  }
 }
 
 fragment userRepositories on RepositoryConnection {
-    nodes {
-        id
-        name
-        isPrivate
-        updatedAt
-        createdAt
-        languages(first: 30) {
-          edges {
-            node {
-              name
-              color
-            }
-            size
-          }
-          totalSize
+  nodes {
+   id
+    name
+    isPrivate
+    updatedAt
+    createdAt
+    languages(first: 30) {
+      edges {
+        node {
+          name
+          color
         }
+        size
+      }
+      totalSize
     }
-    totalCount
-    pageInfo {
-      hasNextPage
-      endCursor
-    }
+  }
+  totalCount
+  pageInfo {
+    hasNextPage
+    endCursor
+  }
 } 

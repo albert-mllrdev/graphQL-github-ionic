@@ -12,35 +12,35 @@ extend type Mutation {
   setRepositorySortDirection(input: String!): String
 }
 
-query GetUserSort {
+query getUserSort {
   userSort @client
 }
 
-mutation SetUserSort($input: String!) {
+mutation setUserSort($input: String!) {
   setUserSort(input: $input) @client
 }
 
-query GetUserSearch {
+query getUserSearch {
   userSearch @client
 }
 
-mutation SetUserSearch($input: String!) {
+mutation setUserSearch($input: String!) {
   setUserSearch(input: $input) @client
 }
 
-query GetRepositorySort {
+query getRepositorySort {
   repositorySort @client
 }
 
-mutation SetRepositorySort($input: String!) {
+mutation setRepositorySort($input: String!) {
   setRepositorySort(input: $input) @client
 }
 
-query GetRepositorySortDirection {
+query getRepositorySortDirection {
   repositorySortDirection @client
 }
 
-mutation SetRepositorySortDirection($input: String!) {
+mutation setRepositorySortDirection($input: String!) {
   setRepositorySortDirection(input: $input) @client
 }
 

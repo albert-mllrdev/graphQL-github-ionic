@@ -2,7 +2,7 @@ overwrite: true
 schema:
   - https://api.github.com/graphql:
       headers:
-        Authorization: 'token 151fc5fa1bf985cedfb53304460afd3b94679328'
+        Authorization: 'token <place GITHUB_AUTH_TOKEN here>'
   - 'src/app/core/graphQL/*.graphql'
 documents: 'src/app/core/graphQL/*.graphql'
 generates:

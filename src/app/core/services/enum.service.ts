@@ -21,6 +21,7 @@ export class EnumService {
         value: RepositorySortItemLabel.get(value) ?? ''
       };
     }).filter(sort => sort.value.length > 0);
+    sortItems.reverse();
     return sortItems;
   }
 

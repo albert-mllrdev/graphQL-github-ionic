@@ -43,10 +43,9 @@ export class UsersPage implements OnInit {
     this.userService.initialize(this.parameters);
     this.userService.loadUsers().subscribe((result: IUserFetchResult | null) => {
       this.loadUsers(result);
-      this.isLoading = false;
     },
     error => {
-      if (error.networkError && error.networkError.status === 401){
+      if (error?.networkError?.status === 401){
         this.router.navigate(['/login']);
       }
     });
@@ -57,10 +56,11 @@ export class UsersPage implements OnInit {
       this.users =  [... result.users];
       this.hasNextPage = result.hasNextPage;
       this.parameters.cursor = result.cursor;
+      this.isLoading = false;
     }
   }
 
-  loadMoreUsers(event: { target: any; }) {
+  loadMoreUsers(event: { target: { complete: () => void; }; }) {
     this.isLoading = true;
     this.userService.loadMoreUsers(this.parameters.cursor).subscribe(() => {
       event.target.complete();
@@ -70,12 +70,11 @@ export class UsersPage implements OnInit {
   private resetFields() {
     this.users = null;
     this.parameters.cursor =  null;
-    this.content.scrollToTop();
     this.isLoading = true;
     this.userService.updateVariables(this.parameters).subscribe((result: IUserFetchResult | null) => {
       this.loadUsers(result);
-      this.isLoading = false;
     });
+    this.content.scrollToTop();
   }
 
   private watchSortSearch() {

@@ -18071,7 +18071,7 @@ export const SearchNodesFragmentDoc = gql`
 }
     `;
 export const GetUserSortDocument = gql`
-    query GetUserSort {
+    query getUserSort {
   userSort @client
 }
     `;
@@ -18084,7 +18084,7 @@ export const GetUserSortDocument = gql`
     
   }
 export const SetUserSortDocument = gql`
-    mutation SetUserSort($input: String!) {
+    mutation setUserSort($input: String!) {
   setUserSort(input: $input) @client
 }
     `;
@@ -18097,7 +18097,7 @@ export const SetUserSortDocument = gql`
     
   }
 export const GetUserSearchDocument = gql`
-    query GetUserSearch {
+    query getUserSearch {
   userSearch @client
 }
     `;
@@ -18110,7 +18110,7 @@ export const GetUserSearchDocument = gql`
     
   }
 export const SetUserSearchDocument = gql`
-    mutation SetUserSearch($input: String!) {
+    mutation setUserSearch($input: String!) {
   setUserSearch(input: $input) @client
 }
     `;
@@ -18123,7 +18123,7 @@ export const SetUserSearchDocument = gql`
     
   }
 export const GetRepositorySortDocument = gql`
-    query GetRepositorySort {
+    query getRepositorySort {
   repositorySort @client
 }
     `;
@@ -18136,7 +18136,7 @@ export const GetRepositorySortDocument = gql`
     
   }
 export const SetRepositorySortDocument = gql`
-    mutation SetRepositorySort($input: String!) {
+    mutation setRepositorySort($input: String!) {
   setRepositorySort(input: $input) @client
 }
     `;
@@ -18149,7 +18149,7 @@ export const SetRepositorySortDocument = gql`
     
   }
 export const GetRepositorySortDirectionDocument = gql`
-    query GetRepositorySortDirection {
+    query getRepositorySortDirection {
   repositorySortDirection @client
 }
     `;
@@ -18162,7 +18162,7 @@ export const GetRepositorySortDirectionDocument = gql`
     
   }
 export const SetRepositorySortDirectionDocument = gql`
-    mutation SetRepositorySortDirection($input: String!) {
+    mutation setRepositorySortDirection($input: String!) {
   setRepositorySortDirection(input: $input) @client
 }
     `;
@@ -18209,9 +18209,9 @@ export const GetRepositoriesDocument = gql`
   }
 export const GetRepositoriesFromCacheDocument = gql`
     query getRepositoriesFromCache($login: String!, $fetch: Int!, $cursor: String, $sortBy: RepositoryOrderField!, $orderBy: OrderDirection!) {
-  user(login: $login) @client {
+  user(login: $login) @connection(key: "user") {
     login
-    repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) @client {
+    repositories(first: $fetch, orderBy: {field: $sortBy, direction: $orderBy}, after: $cursor) @client @connection(key: "repository") {
       ...userRepositories
     }
   }
