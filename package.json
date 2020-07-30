@@ -5,11 +5,10 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "setKeys": "ts-node setKeys.ts",
     "start": "ng serve -- --proxy-config src/proxy.conf.json",
     "build": "ng build",
-    "ionic:serve:before": "npm run setKeys",
-    "ionic:build:before": "npm run setKeys",
+    "ionic:serve:before": "ts-node setKeys.ts",
+    "ionic:build:before": "ts-node setKeys.ts",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -37,14 +36,10 @@
     "apollo-cache-persist": "^0.1.1",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.11",
-    "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.3",
     "ngx-pipes": "^2.7.5",
     "rxjs": "~6.5.1",
-    "tslib": "^1.10.0",
-    "tslint-config-airbnb": "^5.11.2",
-    "tslint-config-prettier": "^1.18.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
@@ -64,6 +59,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
+    "dotenv": "^8.2.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~5.0.0",
@@ -74,6 +70,9 @@
     "protractor": "~5.4.3",
     "ts-node": "^8.3.0",
     "tslint": "^6.1.2",
+    "tslib": "^1.10.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "~3.8.3"
   },
   "description": "An Ionic project"
