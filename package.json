@@ -5,8 +5,11 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
+    "setKeys": "ts-node setKeys.ts",
     "start": "ng serve -- --proxy-config src/proxy.conf.json",
     "build": "ng build",
+    "ionic:serve:before": "npm run setKeys",
+    "ionic:build:before": "npm run setKeys",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -34,6 +37,7 @@
     "apollo-cache-persist": "^0.1.1",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.11",
+    "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.3",
     "ngx-pipes": "^2.7.5",
@@ -68,7 +72,7 @@
     "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "~5.4.3",
-    "ts-node": "~8.3.0",
+    "ts-node": "^8.3.0",
     "tslint": "^6.1.2",
     "typescript": "~3.8.3"
   },
