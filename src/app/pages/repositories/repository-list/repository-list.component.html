@@ -3,7 +3,7 @@
   <ng-container *ngFor="let repository of repositories | unique: 'id'">
     <app-repository-list-item [repository]="repository"></app-repository-list-item>
   </ng-container> 
-  <ion-item *ngIf="repositories?.length == 0">
+  <ion-item *ngIf="repositories?.length == 0" lines="none">
     <ion-text color="danger">
       No repositories found...
     </ion-text>

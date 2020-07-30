@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 
@@ -14,7 +14,7 @@ import { IRepositoryListParameter } from '@albert/interfaces/IRepositoryListPara
   templateUrl: './repositories.page.html',
   styleUrls: ['./repositories.page.scss'],
 })
-export class RepositoriesPage implements OnInit {
+export class RepositoriesPage implements OnInit, OnDestroy {
   @ViewChild(IonContent) content!: IonContent;
 
   userAvatarURL?: string | null;
@@ -39,6 +39,11 @@ export class RepositoriesPage implements OnInit {
 
   ngOnInit() {
     this.setUser();
+  }
+
+  ngOnDestroy() {
+    this.cacheService.setRepositorySort(environment.DEFAULT_REPOSITORY_SORT);
+    this.cacheService.setRepositorySortDirection(environment.DEFAULT_REPOSITORY_DIRECTION);
   }
 
   setUser(){
@@ -98,14 +103,14 @@ export class RepositoriesPage implements OnInit {
   }
 
   private watchSort() {
-    this.cacheService.getRepositorySort().subscribe(result => {
+    this.cacheService.watchRepositorySort().subscribe(result => {
       if (this.repositories) {
         this.parameters.sortBy = result;
         this.resetFields();
       }
     });
 
-    this.cacheService.getRepositorySortDirection().subscribe(result => {
+    this.cacheService.watchRepositorySortDirection().subscribe(result => {
       if (this.repositories) {
         this.parameters.orderBy = result;
         this.resetFields();

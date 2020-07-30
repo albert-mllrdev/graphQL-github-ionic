@@ -78,14 +78,14 @@ export class UsersPage implements OnInit {
   }
 
   private watchSortSearch() {
-    this.cacheService.getUserSort().subscribe(result => {
+    this.cacheService.watchUserSort().subscribe(result => {
       if (this.users) {
         this.parameters.sortBy = result;
         this.resetFields();
       }
     });
 
-    this.cacheService.getUserSearch().subscribe(result => {
+    this.cacheService.watchUserSearch().subscribe(result => {
       if (this.users) {
         this.parameters.searchText = result;
         this.resetFields();

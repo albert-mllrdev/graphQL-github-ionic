@@ -30,14 +30,13 @@ export class CacheService {
     private getRepositorySortGQL: GetRepositorySortGQL,
     private setRepositorySortDirectionGQL: SetRepositorySortDirectionGQL,
     private getRepositorySortDirectionGQL: GetRepositorySortDirectionGQL,
-    private getUserAvatarFromCacheGQL: GetUserAvatarFromCacheGQL
-  ) { }
+    private getUserAvatarFromCacheGQL: GetUserAvatarFromCacheGQL) { }
 
   setUserSort(sort: UserSortItem) {
     this.setUserSortGQL.mutate({ input: sort }).subscribe();
   }
 
-  getUserSort() {
+  watchUserSort() {
     return this.getUserSortGQL.watch().valueChanges.pipe(
       map(result => {
         return (result.data.userSort as UserSortItem);
@@ -49,7 +48,7 @@ export class CacheService {
     this.setUserSearchGQL.mutate({ input: search }).subscribe();
   }
 
-  getUserSearch() {
+  watchUserSearch() {
     return this.getUserSearchGQL.watch().valueChanges.pipe(
       map(result => {
         return result.data.userSearch;
@@ -61,7 +60,7 @@ export class CacheService {
     this.setRepositorySortGQL.mutate({ input: sort }).subscribe();
   }
 
-  getRepositorySort() {
+  watchRepositorySort() {
     return this.getRepositorySortGQL.watch().valueChanges.pipe(
       map(result => {
         return (result.data.repositorySort as RepositoryOrderField);
@@ -73,7 +72,7 @@ export class CacheService {
     this.setRepositorySortDirectionGQL.mutate({ input: direction }).subscribe();
   }
 
-  getRepositorySortDirection() {
+  watchRepositorySortDirection() {
     return this.getRepositorySortDirectionGQL.watch().valueChanges.pipe(
       map(result => {
         return (result.data.repositorySortDirection as OrderDirection);
